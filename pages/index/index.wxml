@@ -1,0 +1,47 @@
+<view class="search_input">
+
+  <searchInput></searchInput>
+
+</view>
+ <!--轮播图-->
+  <view class="index_swiper" >
+  <swiper indicator-dots indicator-color="#fff">
+    <swiper-item wx:for="{{swiperList}}" wx:key="goods_id"> 
+      <navigator open-type="navigate">
+          <image src="{{item.image_src}}" mode="widthFix">  </image>
+      </navigator>
+    </swiper-item>
+  </swiper> 
+  </view>
+ <!--轮播结束-->
+<!--金刚区开始-->
+<view class="index_cate" >
+  <navigator wx:for="{{cateList}}" wx:key="name">
+  <image src="{{item.image_src}}" mode="widthFix" >
+    
+  </image>
+  </navigator>
+</view>
+<!--金刚区结束-->
+<!--商品分类开始-->
+<view class="index_floor" >
+  <view class="index_classGood" wx:for="{{classGoodList}}" wx:for-item="item1" wx:for-index="index1" wx:key="floor_title">
+    <!--标题-->
+      <view class="classGood_title" >
+        <image mode="widthFix" src="{{item1.floor_title.image_src}}">
+        
+        </image>
+      </view>
+      <!-- 列表-->
+      <view class="classGood_list" >
+        <navigator wx:for="{{item1.product_list}}" wx:for-item="item2" wx:for-index="index2" wx:key="name">
+          <image src="{{item2.image_src}}" mode="{{index2===0?'widthFix':'scaleToFill'}}"  />
+            
+        </navigator>
+          
+      </view>
+  </view>
+</view>
+
+<!--商品分类结束-->
+  

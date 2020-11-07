@@ -1,0 +1,154 @@
+.address_btn {
+  padding: 20rpx;
+
+  button {
+    font-size: 28rpx;
+    // width: 20%;
+  }
+}
+
+.user_info {
+  padding: 20rpx;
+  border-bottom: 1px solid #eee;
+
+  .user_form {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10rpx;
+    color: #000;
+
+    .user_name {
+      font-size: 35rpx;
+      font-weight: 500;
+    }
+
+    .user_phone {
+      font-size: 35rpx;
+      font-weight: 500;
+      margin-left: 40rpx;
+    }
+  }
+
+  .user_address {
+    font-size: 25rpx;
+  }
+}
+
+// 商品购物车列表
+.goods_cart_list {
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.cart_item {
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+}
+
+.checkbox {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image_item {
+  flex: 2;
+
+  image {
+    width: 180rpx;
+    height: 180rpx;
+    // background-color: salmon;
+  }
+}
+
+.cart_info {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  // margin: 0 20rpx;
+  justify-content: space-around;
+  margin: 0 20rpx;
+
+  .cart_detail {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 26rpx;
+    margin-bottom: 30rpx;
+
+  }
+
+  .cart_row {
+    display: flex;
+    justify-content: space-between;
+
+    .cart_price {
+      font-size: 32rpx;
+      font-weight: 700;
+      color: var(--themeColor);
+
+
+    }
+
+    .cart_num_tool {
+      display: flex;
+      flex-direction: row;
+
+      .num {
+        width: 90rpx;
+        height: 40rpx;
+        background-color: #eee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 20rpx;
+
+
+      }
+    }
+  }
+}
+
+// 底部栏
+.footer_tool {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  // background-color: darkblue;
+  height: 90rpx;
+
+  .all_chk_wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin-left: 20rpx;
+    // justify-content: center;
+  }
+
+  .total_price_wrap {
+    flex: 2;
+
+    .price {
+      font-size: 40rpx;
+      color: #ff6633;
+    }
+  }
+
+  .order_pay_wrap {
+    flex: 1;
+    background-color: #ff6633;
+    height: 100%;
+    // text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+}
