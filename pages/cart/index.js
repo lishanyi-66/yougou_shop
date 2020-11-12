@@ -64,6 +64,64 @@ totalNum:0
     }
  
   },
+  // 
+  handleItemChange(e){
+    // 获取点击事件对象的id
+    const goods_id=e.currentTarget.dataset.id;
+    console.log(goods_id)
+    // 获取购物车中的对象
+    let {cart}=this.data
+    console.log(cart)
+    // 找到要被修改的商品对象
+    let index=cart.findIndex(v=>v.data.message.goods_id===goods_id)
+    // 选中取反
+    cart[index].checked=!cart[index].checked
+    // 把购物车中的数据重新设置回data中和缓存中
+    
+    wx.setStorageSync('cart',cart)
+    // 计算总数量和总价
+    let allChecked=true;
+    let totalPrice=0;
+    let totalNum=0;
+    cart.forEach(v => {
+      if(v.checked){
+        totalPrice+=v.num * v.data.message.goods_price;
+        totalNum+=v.num;
+      }else{
+        allChecked=false;
+      }
+    })
+    // 判断下数组是否为空
+    allChecked=cart.length!=0?allChecked:false
+    // 给data赋值
+    this.setData({
+      cart,
+      allChecked,
+      totalNum,
+      totalPrice
+    })
+
+  },
+  // 设置购物车状态的同时，重新计算 底部工具栏的数据 全选 总价格 购买的数量
+  setCart(cart){
+    let allChecked=true;
+    let totalPrice=0;
+    let totalNum=0;
+    cart.forEach(v=>{
+      if(v.checked){
+        totalPrice+=v.num+v.data.message.goods_price
+      }else{
+        allChecked=false
+      }
+    })
+    // 判断数组是否为空
+    allChecked=cart.length!=0?allChecked:false;
+    this.setData({
+      cart,
+      totalPrice,totalNum,allChecked
+    });
+    wx.setStorageSync('cart',cart)
+  }
   /**
    * 生命周期函数--监听页面加载
    */
@@ -88,17 +146,22 @@ totalNum:0
     // 1.onshow 中获取缓存中的购物车数据
     // 2.根据购物车中的商品数据所有的商品都被选中checked=true,
     // every()方法 空数组调用every 调用的就是true
-    const allChecked=cart.length?cart.every(v=>v.checked):false
-    console.log(allChecked)
-    // 商品总价格
+    // const allChecked=cart.length?cart.every(v=>v.checked):false
+    // console.log(allChecked)
+    // // 商品总价格
+    let allChecked=true;
     let totalPrice=0;
     let totalNum=0;
     cart.forEach(v => {
       if(v.checked){
         totalPrice+=v.num * v.data.message.goods_price;
         totalNum+=v.num;
+      }else{
+        allChecked=false;
       }
     })
+    // 判断下数组是否为空
+    allChecked=cart.length!=0?allChecked:false
     // 给data赋值
     this.setData({
       address,
