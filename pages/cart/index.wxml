@@ -35,11 +35,15 @@
             <view class="cart_row">
                 <view class="cart_price">¥{{item.data.message.goods_price}}</view>
                 <view class="cart_num_tool">
-                    <view class="sub">-</view>
+                    <view class="sub" bindtap="handleItemNumEdit" data-id="{{item.goods_id}}" data-operation="{{-1}}">
+                        -
+                    </view>
                     <view class="num">
                         <text>{{item.num}}</text>
                     </view>
-                    <view class="add">+</view>
+                    <view class="add" bindtap="handleItemNumEdit" data-id="{{item.goods_id}}" data-operation="{{1}}">
+                        +
+                    </view>
                 </view>
             </view>
         </view>
@@ -49,10 +53,9 @@
 <view class="footer_tool">
     <!-- 全选 -->
     <view class="all_chk_wrap">
-        <checkbox-group bindchange="">
-            <checkbox checked="{{allChecked}}"></checkbox>
+        <checkbox-group bindchange="handleItemAllCheck">
+            <checkbox checked="{{allChecked}}">全选</checkbox>
         </checkbox-group>
-        <text>全选</text>
     </view>
     <!-- 总价格 -->
     <view class="total_price_wrap">

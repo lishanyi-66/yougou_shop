@@ -56,7 +56,7 @@ Page({
     // 获取缓存数据
     let cart=wx.getStorageSync("cart")||[];//空数组
     //判断缓存数据中是否存在数据
-    let index=cart.findIndex(v=>v.data.message.goods_id===this.goodsInfo.goods_id)
+    let index=cart.findIndex(v=>v.goods_id===this.goodsInfo.goods_id)
     console.log(index)
     if(index===-1){
       //不存在 第一次添加
@@ -71,6 +71,7 @@ Page({
       cart[index].num++;
 
     }
+    console.log(cart[index])
     // 把购物车重新加回缓存中
     wx.setStorageSync("cart", cart);
     // 弹窗提示

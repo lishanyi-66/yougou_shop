@@ -79,27 +79,27 @@ totalNum:0
     // 把购物车中的数据重新设置回data中和缓存中
     
     wx.setStorageSync('cart',cart)
-    // 计算总数量和总价
-    let allChecked=true;
-    let totalPrice=0;
-    let totalNum=0;
-    cart.forEach(v => {
-      if(v.checked){
-        totalPrice+=v.num * v.data.message.goods_price;
-        totalNum+=v.num;
-      }else{
-        allChecked=false;
-      }
-    })
-    // 判断下数组是否为空
-    allChecked=cart.length!=0?allChecked:false
-    // 给data赋值
-    this.setData({
-      cart,
-      allChecked,
-      totalNum,
-      totalPrice
-    })
+    // // 计算总数量和总价
+    // let allChecked=true;
+    // let totalPrice=0;
+    // let totalNum=0;
+    // cart.forEach(v => {
+    //   if(v.checked){
+    //     totalPrice+=v.num * v.data.message.goods_price;
+    //     totalNum+=v.num;
+    //   }else{
+    //     allChecked=false;
+    //   }
+    // })
+    // // 判断下数组是否为空
+    // allChecked=cart.length!=0?allChecked:false
+    // // 给data赋值
+    // this.setData({
+    //   cart,
+    //   allChecked,
+    //   totalNum,
+    //   totalPrice
+    // })
 
   },
   // 设置购物车状态的同时，重新计算 底部工具栏的数据 全选 总价格 购买的数量
@@ -109,7 +109,7 @@ totalNum:0
     let totalNum=0;
     cart.forEach(v=>{
       if(v.checked){
-        totalPrice+=v.num+v.data.message.goods_price
+        totalPrice+=v.num*v.data.message.goods_price
       }else{
         allChecked=false
       }
@@ -121,7 +121,46 @@ totalNum:0
       totalPrice,totalNum,allChecked
     });
     wx.setStorageSync('cart',cart)
-  }
+  },
+  handleItemAllCheck(){
+    // 获取data中的数据
+    let {cart,allChecked}=this.data;
+    // 修改值
+    allChecked=!allChecked;
+    // 循环修该cart数组中的商品选中状态
+    cart.forEach(v=>v.checked=allChecked);
+    // 修改后的值填充到data缓存中
+    this.setCart(cart)
+  },
+  handleItemNumEdit(e){
+    // 商品传递过来的参数
+    const {operation,id}=e.currentTarget.dataset;
+    let {cart}=this.data;
+    const index=cart.findIndex(v=>v.goods_id===id);
+    // 判断是否要执行删除
+    if(cart[index].num===1&&operation===-1){
+      // 弹窗设置
+      wx.showModal({
+        title: '提示',
+        content: '您是否删除',
+        success (res) {
+          if (res.confirm) {
+            cart.splice(index,1);
+            this.setCart(cart);
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+      
+      
+    }else{
+      cart[index].num+=operation
+    // 设置会缓存和data
+    this.setCart(cart)
+    }
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
